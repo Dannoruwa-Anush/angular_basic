@@ -13,5 +13,6 @@ import { RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
 
+  // Property Binding
   image_company_logo = 'assets/images/logo/logo.png';
 }
