@@ -1,0 +1,97 @@
+<div class="dashboard-container">
+
+    <!-- ================= FORM ================= -->
+    <mat-card class="dashboard-form">
+        <form [formGroup]="brandForm" (ngSubmit)="onSubmit()">
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Brand Name</mat-label>
+
+                <input matInput formControlName="brandName" [disabled]="isViewMode()" />
+
+                <mat-error *ngIf="brandForm.controls['brandName'].hasError('required')">
+                    Brand name is required
+                </mat-error>
+
+                <mat-error *ngIf="brandForm.controls['brandName'].hasError('pattern')">
+                    Only letters and spaces allowed
+                </mat-error>
+            </mat-form-field>
+
+            <div class="form-actions">
+                <button mat-raised-button color="primary" type="submit" [disabled]="brandForm.invalid || isViewMode()">
+                    {{ isEditMode() ? 'Update' : 'Save' }}
+                </button>
+
+                <button mat-stroked-button type="button" (click)="cancel()">
+                    Cancel
+                </button>
+            </div>
+
+        </form>
+    </mat-card>
+
+    <!-- ================= LIST ================= -->
+    <mat-card class="dashboard-list">
+
+        <!-- SEARCH -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Search Brand</mat-label>
+            <input matInput [formControl]="searchControl" />
+        </mat-form-field>
+
+        <!-- TABLE -->
+        <table mat-table [dataSource]="brands()">
+
+            <!-- BRAND -->
+            <ng-container matColumnDef="brandName">
+                <th mat-header-cell *matHeaderCellDef>Brand</th>
+                <td mat-cell *matCellDef="let row">
+                    {{ row.brandName }}
+                </td>
+            </ng-container>
+
+            <!-- CREATED -->
+            <ng-container matColumnDef="createdAt">
+                <th mat-header-cell *matHeaderCellDef>Created</th>
+                <td mat-cell *matCellDef="let row">
+                    {{ row.createdAt | date:'short' }}
+                </td>
+            </ng-container>
+
+            <!-- ACTIONS -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-icon-button color="primary" (click)="view(row)">
+                        <mat-icon>visibility</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="accent" (click)="edit(row)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="warn" (click)="delete(row)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <!-- EMPTY STATE -->
+        <div *ngIf="brands().length === 0" class="empty-state">
+            <mat-icon>info</mat-icon>
+            <p>List is empty</p>
+        </div>
+
+        <!-- PAGINATION -->
+        <mat-paginator [length]="totalCount()" [pageSize]="pageSize()" [pageSizeOptions]="[5, 10, 25]"
+            (page)="onPageChange($event)">
+        </mat-paginator>
+
+    </mat-card>
+
+</div>
