@@ -1,25 +1,25 @@
-import { Component, computed, effect, Signal, signal } from '@angular/core';
-
-import { MaterialModule } from '../../../custom_modules/material/material-module';
-import { FormsModule } from '@angular/forms';
-import { BrandModel } from '../../../models/api_models/brandModel';
-import { DashboardModeEnum } from '../../../config/enums/dashboardModeEnum';
-import { BrandService } from '../../../services/api_services/brandService';
-import { PageEvent } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
+import { Component, computed, effect, signal, Signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MaterialModule } from '../../../custom_modules/material/material-module';
+import { PageEvent } from '@angular/material/paginator';
+import { DashboardModeEnum } from '../../../config/enums/dashboardModeEnum';
+import { BrandModel } from '../../../models/api_models/brandModel';
+import { BrandService } from '../../../services/api_services/brandService';
 
 @Component({
-  selector: 'app-brand-component',
+  selector: 'app-template-driven-brand-component',
   imports: [
     MaterialModule,
     FormsModule,
     CommonModule,
   ],
-  templateUrl: './brand-component.html',
-  styleUrl: './brand-component.scss',
+  templateUrl: './template-driven-brand-component.html',
+  styleUrl: './template-driven-brand-component.scss',
 })
-export class BrandComponent {
+export class TemplateDrivenBrandComponent {
 
+  
   // ======================================================
   // STATE
   // ======================================================

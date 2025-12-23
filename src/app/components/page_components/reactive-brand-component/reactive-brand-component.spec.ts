@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BrandComponent } from './brand-component';
+import { ReactiveBrandComponent } from './reactive-brand-component';
 
-describe('BrandComponent', () => {
-  let component: BrandComponent;
-  let fixture: ComponentFixture<BrandComponent>;
+describe('ReactiveBrandComponent', () => {
+  let component: ReactiveBrandComponent;
+  let fixture: ComponentFixture<ReactiveBrandComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BrandComponent]
+      imports: [ReactiveBrandComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BrandComponent);
+    fixture = TestBed.createComponent(ReactiveBrandComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
